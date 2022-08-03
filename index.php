@@ -25,51 +25,87 @@
 <body>
 
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-    <div class="container">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">@</span>
-      </div>
-      <input type="text" class="form-control" placeholder="Username do GitHub" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-    </div>
-  </form>
+	<form class="form-inline">
+    	<div class="container">
+    		<div class="input-group">
+      			<div class="input-group-prepend">
+        			<span class="input-group-text" id="basic-addon1">github.com/</span>
+      			</div>
+      			<input type="text" class="form-control" placeholder="Username do GitHub" value="" id="usernameGitHub" aria-label="Username" aria-describedby="basic-addon1">
+				<input type="button" id="buscarProgramador" value="Buscar">
+    		</div>
+    	</div>
+  	</form>
 </nav>
 
-	<br>
+<br>
 
-	<div class="container" style="justify-content: center;">
-    	<div class="row" >
-        	<div class="col-6">
+<div class="container" style="justify-content: center;">
+    <div class="row" >
+        <div class="col-6" id="primeiraLinhaPai">
+			<div id="primeiraLinhaFilho">
 				<img src="https://github-readme-stats.vercel.app/api?username=guilhermedonizetti&show_icons=true&theme=merko">
 				<img src="https://github-readme-streak-stats.herokuapp.com?user=guilhermedonizetti&theme=blux&date_format=j%20M%5B%20Y%5D&background=000000" alt="Todas as Contribuicoes no GitHub"/>
-        	</div>
-        	<div class="col-6">
-				<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=guilhermedonizetti&langs_count=10&theme=dark" />
-        	</div>
-    	</div>
-		<div>
-		<img src="https://activity-graph.herokuapp.com/graph?username=guilhermedonizetti&theme=react-dark" alt="Gráfico das contribuições recentes no GitHub">
+			</div>
+        </div>
+        <div class="col-6" id="segundaLinhaPai">
+			<div id="segundaLinhaFilho">
+				<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=guilhermedonizetti&langs_count=8&theme=dark" />
+			</div>
+        </div>
+    </div>
+	<div id="terceiraLinhaPai">
+		<div id="terceiraLinhaFilho">
+			<img src="https://activity-graph.herokuapp.com/graph?username=guilhermedonizetti&theme=react-dark" alt="Gráfico das contribuições recentes no GitHub">
 		</div>
 	</div>
+</div>
 
 
-	<br>
+<br>
 
-	<!-- FOOTER -->
-	<footer class="bg-light text-center text-lg-start">
-		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-	    	Ver Estatísticas - 
-	    	<a class="text-dark" href="https://github.com/guilhermedonizetti/" target="_blank">Guilherme Donizetti</a>
-	  	</div>
-	</footer>
+<!-- FOOTER -->
+<footer class="bg-light text-center text-lg-start">
+	<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+	    Ver Estatísticas - 
+	    <a class="text-dark" href="https://github.com/guilhermedonizetti/" target="_blank">Guilherme Donizetti</a>
+	</div>
+</footer>
 
 
-	<!-- SCRIPTS -->
-	<script type="text/javascript">
+<!-- SCRIPTS -->
+<script type="text/javascript">
 
-	</script>
-	<!-- fim scripts -->
+	$("#buscarProgramador").on("click", function(){
+		var nomeUsuario = $("#usernameGitHub").val();
+
+		nomeUsuario = nomeUsuario.replaceAll(" ", "");
+
+		if(nomeUsuario.includes("github.com")){
+			nomeUsuario = nomeUsuario.split("github.com/");
+			nomeUsuario = nomeUsuario[1].replaceAll("/", "");
+		}
+		
+		$("#primeiraLinhaFilho").remove();
+		html = '<div id="primeiraLinhaFilho">';
+		html += '<img src="https://github-readme-stats.vercel.app/api?username='+nomeUsuario+'&show_icons=true&theme=merko">';
+		html += '<img src="https://github-readme-streak-stats.herokuapp.com?user='+nomeUsuario+'&theme=blux&date_format=j%20M%5B%20Y%5D&background=000000" alt="Todas as Contribuicoes no GitHub"/>';
+		html += '</div>';
+		$("#primeiraLinhaPai").html(html);
+
+
+		$("#segundaLinhaFilho").remove();
+		html = '<div id="segundaLinhaFilho"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username='+nomeUsuario+'&langs_count=8&theme=dark" /></div>'
+		$("#segundaLinhaPai").html(html);
+
+		$("#terceiraLinhaFilho").remove();
+		html = '<div id="terceiraLinhaPai"><img src="https://activity-graph.herokuapp.com/graph?username='+nomeUsuario+'&theme=react-dark" alt="Gráfico das contribuições recentes no GitHub"></div>';
+		$("#terceiraLinhaPai").html(html);
+
+	})
+
+</script>
+<!-- fim scripts -->
+
 </body>
 </html>
